@@ -10,7 +10,7 @@ function Layout () {
   return (
     <div>
       <Navbar />
-      <main className='mb-auto w-10/12 mx-auto'>
+      <main className='mb-auto w-full mx-auto h-screen'>
         <Outlet />
       </main>
       <Footer />

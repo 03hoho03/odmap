@@ -29,6 +29,7 @@ module.exports = {
   ],
   rules: {
     quotes: ['error', 'single', { avoidEscape: true }],
-    indent: ['error', 2]
+    indent: ['error', 2],
+    semi: [2, 'never']
   }
 }
