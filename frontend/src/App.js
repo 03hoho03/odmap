@@ -1,10 +1,10 @@
-import './App.css'
-import React from 'react'
-import Navbar from './layout/NavBar'
-import Footer from './layout/Footer'
-import { Outlet, Route, Routes } from 'react-router-dom'
-import MainPage from './pages/MainPage/MainPage'
-import MapPage from './pages/MapPage/MapPage'
+import './App.css';
+import React from 'react';
+import Navbar from './layout/NavBar';
+import Footer from './layout/Footer';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import MainPage from './pages/MainPage/MainPage';
+import MapPage from './pages/MapPage/MapPage';
 
 function Layout () {
   return (
@@ -15,7 +15,7 @@ function Layout () {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
 function App () {
@@ -26,7 +26,7 @@ function App () {
         <Route path='/map' element={<MapPage />} />
       </Route>
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   userData: {
@@ -11,7 +11,7 @@ const initialState = {
   isAuth: false,
   isLoading: false,
   error: ''
-}
+};
 
 const userSlice = createSlice({
   name: 'user',
@@ -19,6 +19,6 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
   }
-})
+});
 
-export default userSlice.reducer
+export default userSlice.reducer;

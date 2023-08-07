@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NavItem = () => {
   return (
@@ -9,7 +9,7 @@ const NavItem = () => {
       <Link>병원찾기</Link>
       <Link>ODTEST</Link>
     </div>
-  )
-}
+  );
+};
 
-export default NavItem
+export default NavItem;

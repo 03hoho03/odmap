@@ -30,6 +30,8 @@ module.exports = {
   rules: {
     quotes: ['error', 'single', { avoidEscape: true }],
     indent: ['error', 2],
-    semi: [2, 'never']
+    semi: [2, 'always'],
+    'no-unused-vars': 'warn',
+    'react/prop-types': 'off'
   }
-}
+};
