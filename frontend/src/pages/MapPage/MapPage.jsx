@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Map, MarkerClusterer } from 'react-kakao-maps-sdk';
 import ToggleBox from './Sections/ToggleBox';
 import axios from 'axios';
-import Marker from './MapSource/Marker';
-const { kakao } = window;
+import Map from './Sections/Map';
+// const { kakao } = window;
 
 const MapPage = () => {
-  const [center, setCenter] = useState({ lat: 0, lng: 0 });
+  const [center, setCenter] = useState(null);
   const [hospitalInfoArray, setHospitalInfoArray] = useState(null);
+  const [toggled, setToggled] = useState(false);
 
   useEffect(() => {
     fetchHospitalDatas();
     getCurrentCenter();
-    console.log(kakao.maps.MapTypeId);
   }, []);
+
+  function onHandleToggle () {
+    setToggled(!toggled);
+  }
 
   function fetchHospitalDatas () {
     axios.get('http://localhost:7070/map').then(response => { setHospitalInfoArray(response.data); console.log(response.data); });
@@ -35,20 +38,8 @@ const MapPage = () => {
   }
   return (
     <div className='h-full flex'>
-      <ToggleBox />
-      <Map
-        center={center}
-        style={{ width: '100%', height: '100%' }}
-        level={4}
-        mapTypeId={1}
-      >
-        <MarkerClusterer averageCenter={true} minLevel={6}>
-          {hospitalInfoArray
-            ? hospitalInfoArray.map((hospitalInfo) => <Marker key={hospitalInfo.암호화요양기호} hospitalInfo={hospitalInfo}></Marker>
-            )
-            : null}
-        </MarkerClusterer>
-      </Map>
+      <ToggleBox toggled={toggled} onHandleToggle={onHandleToggle} />
+      <Map center={center} hospitalInfoArray={hospitalInfoArray} toggled={toggled} onHandleToggle={onHandleToggle}></Map>
     </div>
   );
 };
