@@ -1,14 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import ToggleBox from './ToggleBox';
 const { kakao } = window;
 
-const Map = ({ center, hospitalInfoArray, toggled, onHandleToggle }) => {
+const Map = ({ center, hospitalInfoArray }) => {
+  const [toggled, setToggled] = useState(false);
+  const [hospitalInfo, setHospitalInfo] = useState({});
   const mapRef = useRef(null);
   const clusterRef = useRef(null);
-
-  function handleMarkerClick () {
-    console.log(toggled);
-    onHandleToggle();
-  }
 
   useEffect(() => {
     const container = document.getElementById('map');
@@ -39,15 +37,26 @@ const Map = ({ center, hospitalInfoArray, toggled, onHandleToggle }) => {
           position: new kakao.maps.LatLng(hospitalInfo['좌표(Y)'], hospitalInfo['좌표(X)']),
           title: hospitalInfo.요양기관명
         });
-        kakao.maps.event.addListener(marker, 'click', () => handleMarkerClick());
+        kakao.maps.event.addListener(marker, 'click', () => onHandleClickMarker(hospitalInfo));
         return marker;
       });
       clusterRef.current.addMarkers(markers);
     }
   }, [hospitalInfoArray]);
 
+  function onHandleClickMarker (hospitalInfo) {
+    setToggled(true);
+    setHospitalInfo(hospitalInfo);
+    console.log(hospitalInfo);
+  }
+
+  function onHandleToggle () {
+    setToggled(!toggled);
+  }
+
   return (
-    <div className='w-screen'>
+    <div className='w-screen flex h-full'>
+      <ToggleBox toggled={toggled} onHandleToggle={onHandleToggle} hospitalInfo={hospitalInfo} />
       <div id='map' style={{ width: '100%', height: '100%' }}>
       </div>
     </div>

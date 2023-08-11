@@ -5,6 +5,8 @@ import Footer from './layout/Footer';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import MainPage from './pages/MainPage/MainPage';
 import MapPage from './pages/MapPage/MapPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
 
 function Layout () {
   return (
@@ -24,6 +26,8 @@ function App () {
       <Route path='/' element={<Layout />}>
         <Route index element={<MainPage />} />
         <Route path='/map' element={<MapPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/register' element={<RegisterPage />} />
       </Route>
     </Routes>
   );
