@@ -19,7 +19,7 @@ const MapPage = () => {
   }
 
   function fetchHospitalDatas () {
-    axios.get('http://localhost:7070/map').then(response => { setHospitalInfoArray(response.data); console.log(response.data); });
+    axios.get('http://localhost:7070/map').then(response => { setHospitalInfoArray(response.data); });
   }
   function getCurrentCenter () {
     if (navigator.geolocation) {

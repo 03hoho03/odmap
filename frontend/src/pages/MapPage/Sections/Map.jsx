@@ -39,7 +39,7 @@ const Map = ({ center, hospitalInfoArray, toggled, onHandleToggle }) => {
           position: new kakao.maps.LatLng(hospitalInfo['좌표(Y)'], hospitalInfo['좌표(X)']),
           title: hospitalInfo.요양기관명
         });
-        kakao.maps.event.addListener(marker, 'click', () => onHandleToggle());
+        kakao.maps.event.addListener(marker, 'click', () => handleMarkerClick());
         return marker;
       });
       clusterRef.current.addMarkers(markers);
