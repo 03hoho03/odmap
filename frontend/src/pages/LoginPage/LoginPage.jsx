@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { loginUser } from '../../store/thunkFunction';
 
 const LoginPage = () => {
   const {
@@ -15,7 +16,7 @@ const LoginPage = () => {
       email,
       password
     };
-    // dispatch(loginUser(body));
+    dispatch(loginUser(body));
     reset();
   };
 
