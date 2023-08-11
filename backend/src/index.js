@@ -21,5 +21,7 @@ app.get('/map',(req,res)=>{
   res.json(data);
 })
 
+app.use('/users',require('./routes/users'));
+
 app.listen(PORT,HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

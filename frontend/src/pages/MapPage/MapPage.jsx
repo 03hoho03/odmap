@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ToggleBox from './Sections/ToggleBox';
 import axios from 'axios';
 import Map from './Sections/Map';
 // const { kakao } = window;
@@ -7,19 +6,14 @@ import Map from './Sections/Map';
 const MapPage = () => {
   const [center, setCenter] = useState(null);
   const [hospitalInfoArray, setHospitalInfoArray] = useState(null);
-  const [toggled, setToggled] = useState(false);
 
   useEffect(() => {
     fetchHospitalDatas();
     getCurrentCenter();
   }, []);
 
-  function onHandleToggle () {
-    setToggled(!toggled);
-  }
-
   function fetchHospitalDatas () {
-    axios.get('http://localhost:7070/map').then(response => { setHospitalInfoArray(response.data); console.log(response.data); });
+    axios.get('http://localhost:7070/map').then(response => { setHospitalInfoArray(response.data); });
   }
   function getCurrentCenter () {
     if (navigator.geolocation) {
@@ -37,9 +31,8 @@ const MapPage = () => {
     console.log('Error occurred while retrieving location.', error);
   }
   return (
-    <div className='h-full flex'>
-      <ToggleBox toggled={toggled} onHandleToggle={onHandleToggle} />
-      <Map center={center} hospitalInfoArray={hospitalInfoArray} toggled={toggled} onHandleToggle={onHandleToggle}></Map>
+    <div className='h-full'>
+      <Map center={center} hospitalInfoArray={hospitalInfoArray}></Map>
     </div>
   );
 };

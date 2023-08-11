@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { loginUser } from './thunkFunction';
 
 const initialState = {
   userData: {
@@ -18,6 +19,21 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userData = action.payload;
+        state.isAuth = true;
+        localStorage.setItem('accessToken', action.payload.accessToken);
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.isLoading = false;
+        console.log(action.payload);
+        state.error = action.payload;
+      });
   }
 });
 
