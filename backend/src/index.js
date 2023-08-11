@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json())
 app.use(express.static(path.join(__dirname,"../source")));
 
-mongoose.connect('mongodb+srv://ghwjd32123:KIHTTy9XsPjceggU@cluster0.tspiq2y.mongodb.net/?retryWrites=true&w=majority').then(()=>{
+mongoose.connect('mongodb+srv://ghwjd32123:<password>@cluster0.tspiq2y.mongodb.net/?retryWrites=true&w=majority').then(()=>{
     console.log('연결완료');
   }).catch((err)=>{
     console.error(err);
