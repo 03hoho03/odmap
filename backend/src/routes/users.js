@@ -1,8 +1,20 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const async = require('async');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
+
+router.get('/auth',auth, async(req,res,next)=>{
+  return res.json({
+    id:req.user._id,
+    email:req.user.email,
+    name:req.user.name,
+    role:req.user.name,
+    image:req.user.image,
+  });
+})
 
 router.post('/register',async (req,res,next)=>{
   try {
@@ -13,6 +25,7 @@ router.post('/register',async (req,res,next)=>{
     next(error);
   }
 });
+
 
 router.post('/login', async (req,res,next)=> {
   try {
@@ -26,10 +39,21 @@ router.post('/login', async (req,res,next)=> {
     if(!isMatch) {
       return res.status(400).send('Wrong password');
     }
-    // const payload = {
-    //   userId:user._id.toHexString();
-    // }
-    return res.json({user:user});
+    const payload = {
+      // _id 는 schema 생성 시 구별을 위한 기본적인 생성 필드, objectId 형식
+      userId:user._id.toHexString(),
+    }
+
+    const accessToken = jwt.sign(payload, process.env.JWT_SECRET,{expiresIn:'1h'});
+    return res.json({user,accessToken});
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/logout', async (req,res,next)=>{
+  try {
+    return res.sendStatus(200);
   } catch (error) {
     next(error);
   }
