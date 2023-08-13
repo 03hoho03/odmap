@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authUser } from './store/thunkFunction';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import NotAuthRoutes from './components/NotAuthRoutes';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 function Layout () {
   return (
@@ -39,6 +40,7 @@ function App () {
       <Route path='/' element={<Layout />}>
         <Route index element={<MainPage />} />
         <Route element={<ProtectedRoutes isAuth={isAuth} />}>
+          <Route path='profile/:userId' element={<ProfilePage />} />
         </Route>
 
         <Route element={<NotAuthRoutes isAuth={isAuth} />}>
