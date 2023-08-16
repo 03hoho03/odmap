@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const fs = require('fs');
 dotenv.config();
 
 const PORT = 7070;
@@ -28,6 +29,21 @@ app.get("/",(req,res,next)=>{
 app.get('/map',(req,res)=>{
   const data = require('../source/myArray.json');
   res.json(data);
+})
+
+app.get('/image',(req,res,next)=>{
+  const imagePath = path.join(__dirname, '../source/photo1.jpg');
+
+  fs.readFile(imagePath, (err, imageData) => {
+    if (err) {
+      return next(err);
+    }
+    
+    const base64ImageData = imageData.toString('base64');
+
+    // Base64로 인코딩된 이미지 데이터 전송
+    res.send(base64ImageData);
+  });
 })
 
 app.use('/users',require('./routes/users'));
