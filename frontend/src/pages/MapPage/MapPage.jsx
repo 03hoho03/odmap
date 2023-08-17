@@ -25,14 +25,18 @@ const MapPage = () => {
   function successCallback (position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
-    setCenter({ lat: latitude, lng: longitude });
+    const coords = { lat: latitude, lng: longitude };
+    handleCenter(coords);
   }
   function errorCallback (error) {
     console.log('Error occurred while retrieving location.', error);
   }
+  const handleCenter = (coords) => {
+    setCenter(coords);
+  };
   return (
     <div className='h-full'>
-      <Map center={center} hospitalInfoArray={hospitalInfoArray}></Map>
+      <Map center={center} handleCenter={handleCenter} hospitalInfoArray={hospitalInfoArray}></Map>
     </div>
   );
 };
