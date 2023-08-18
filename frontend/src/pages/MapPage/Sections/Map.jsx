@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import ToggleBox from './ToggleBox';
 const { kakao } = window;
 
-const Map = ({ center, hospitalInfoArray }) => {
+const Map = ({ center, handleCenter, hospitalInfoArray }) => {
   const [toggled, setToggled] = useState(false);
   const [hospitalInfo, setHospitalInfo] = useState({});
   const mapRef = useRef(null);
@@ -18,6 +18,7 @@ const Map = ({ center, hospitalInfoArray }) => {
   }, []);
   useEffect(() => {
     if (center) {
+      console.log(center);
       const moveLatLng = new kakao.maps.LatLng(center.lat, center.lng);
       mapRef.current.panTo(moveLatLng);
     }
@@ -45,9 +46,12 @@ const Map = ({ center, hospitalInfoArray }) => {
   }, [hospitalInfoArray]);
 
   function onHandleClickMarker (hospitalInfo) {
+    const latitude = hospitalInfo['좌표(Y)'];
+    const longitude = hospitalInfo['좌표(X)'];
+    const coords = { lat: latitude, lng: longitude };
     setToggled(true);
     setHospitalInfo(hospitalInfo);
-    console.log(hospitalInfo);
+    handleCenter(coords);
   }
 
   function onHandleToggle () {
