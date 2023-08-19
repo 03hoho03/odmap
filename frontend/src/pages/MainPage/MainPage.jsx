@@ -9,7 +9,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div className='h-full'>
+    <div className='h-full w-10/12 mx-auto'>
       {imageData && <img className='object-cover h-full w-full m-auto' src={`data:image/jpg;base64,${imageData}`} alt='Image'/>}
     </div>
   );
