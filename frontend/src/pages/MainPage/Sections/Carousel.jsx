@@ -15,7 +15,7 @@ const Carousel = ({ carouselList }) => {
             const key = `${image}-${idx}`;
 
             return (
-              <li key={key}>
+              <li key={key} className=''>
                 <img src={image} alt='carousel-img' />
               </li>
             );
