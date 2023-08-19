@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 const ToggleBox = ({ toggled, onHandleToggle, hospitalInfo }) => {
+  const [hospitalItem, setHospitalItem] = useState(false);
+
   return (
     <div className='flex'>
       <div className={`bg-white-900 h-full text-black ${toggled ? 'w-96' : 'w-0'}`}>
-        {hospitalInfo && (
+        {hospitalItem && (
           <div className='px-4 py-4 border-solid border-2'>
             <div className='flex items-center'>
               <h3 className='text-xl items-center mr-2 font-bold'>{hospitalInfo.요양기관명}</h3>

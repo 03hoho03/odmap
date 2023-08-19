@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ToggleBox from './ToggleBox';
+import ToggleBox from './ToggleBox/ToggleBox';
 const { kakao } = window;
 
 const Map = ({ center, handleCenter, hospitalInfoArray }) => {
   const [toggled, setToggled] = useState(false);
-  const [hospitalInfo, setHospitalInfo] = useState({});
+  const [hospitalInfo, setHospitalInfo] = useState(null);
   const mapRef = useRef(null);
   const clusterRef = useRef(null);
 
