@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const Carousel = ({ carouselList }) => {
   const [currIndex, setCurrIndex] = useState(0);
@@ -47,25 +49,34 @@ const Carousel = ({ carouselList }) => {
   };
 
   return (
-    <div className='flex mx-auto my-8 w-8/12 items-center justify-items-center'>
-      <div className='relative w-full overflow-hidden'>
-        <button className='absolute bg-gray-400 top-[45%] rounded-md z-10 px-[8px] py-[6px] left-0' onClick={() => handleSwipe(-1)}>
-          &lt
+    <div className='flex mx-auto my-8 w-6/12 items-center justify-items-center'>
+      <div className='relative w-full overflow-hidden rounded-t-lg'>
+        <button className='absolute bg-gray-200 top-[45%] rounded-md z-10 px-[8px] py-[6px] left-1 hover:cursor-pointer' onClick={() => handleSwipe(-1)}>
+          <FontAwesomeIcon icon={faChevronLeft}/>
         </button>
-        <button className='absolute bg-gray-400 top-[45%] rounded-md z-10 px-[8px] py-[6px] right-0' onClick={() => handleSwipe(1)}>
-          &rt
+        <button className='absolute bg-gray-200 top-[45%] rounded-md z-10 px-[8px] py-[6px] right-1 hover:cursor-pointer' onClick={() => handleSwipe(1)}>
+          <FontAwesomeIcon icon={faChevronRight}/>
         </button>
         <ul className='flex w-full' ref={carouselRef}>
           {currList?.map((image, idx) => {
             const key = `${image}-${idx}`;
 
             return (
-              <li key={key} className='flex flex-none items-center justify-center w-full h-[350px] pt-[10px] pb-[15px] overflow-hidden object-contain border-r-[2px] border-l-[2px] rounded-lg'>
+              <li key={key} className='flex flex-none items-center justify-center w-full h-[350px] pt-[10px] pb-[15px] overflow-hidden object-contain rounded-t-lg'>
                 <img src={image} alt='carousel-img' className='min-w-full min-h-full flex-shrink-0' />
               </li>
             );
           })}
         </ul>
+        <div className='bg-gray-900 py-2'>
+          <ul className='flex items-center justify-center'>
+            {currList?.map((value, idx) => {
+              return (
+                <div className='bg-white w-4 h-4 rounded-full m-2 hover:bg-black hover:cursor-pointer' key={idx}></div>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   );
