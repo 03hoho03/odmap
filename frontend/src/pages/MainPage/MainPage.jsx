@@ -3,6 +3,13 @@ import React, { useEffect, useState } from 'react';
 import Carousel from './Sections/Carousel';
 
 const MainPage = () => {
+  const [image, setImage] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:7070/image/slider').then((response) =>
+      setImage(prevImages => [...prevImages, ...response.data.images])
+    );
+  }, []);
+
   const CAROUSEL_IMAGES = [
     'https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg',
     'https://img.freepik.com/premium-vector/abstract-pastel-color-background-with-pink-purple-gradient-effect-graphic-design-decoration_120819-463.jpg',
@@ -11,7 +18,7 @@ const MainPage = () => {
 
   return (
     <div className='h-full w-10/12 mx-auto'>
-      <Carousel carouselList={CAROUSEL_IMAGES} />
+      <Carousel carouselList={image} />
     </div>
   );
 };
