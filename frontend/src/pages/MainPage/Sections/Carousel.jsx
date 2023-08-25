@@ -1,12 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { useInterval } from '../../../hooks/UseInterval';
 
 const Carousel = ({ carouselList }) => {
   const [currIndex, setCurrIndex] = useState(0);
   const [currList, setCurrList] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const carouselRef = useRef(null);
+  const timeoutRef = useRef(null);
+
+  timeoutRef.current = useInterval(() => {
+    handleSwipe(1);
+  }, 5000);
 
   useEffect(() => {
     if (carouselList.length !== 0) {
@@ -15,8 +22,8 @@ const Carousel = ({ carouselList }) => {
       const newList = [endData, ...carouselList, startData];
 
       setCurrList(newList);
+      setCurrIndex(1);
     }
-    console.log(carouselList);
   }, [carouselList]);
 
   useEffect(() => {
@@ -30,23 +37,33 @@ const Carousel = ({ carouselList }) => {
       setCurrIndex(index);
       if (carouselRef.current !== null) {
         carouselRef.current.style.transition = '';
-      }
+      };
     }, 500);
   };
 
   const handleSwipe = (direction) => {
+    if (isAnimating) {
+      return;
+    }
+
+    setIsAnimating(true);
     const newIndex = currIndex + direction;
 
     if (newIndex === carouselList.length + 1) {
+      console.log('played slide function1');
       moveToNthSlide(1);
     } else if (newIndex === 0) {
+      console.log('played slide function2');
       moveToNthSlide(carouselList.length);
     }
-
     setCurrIndex((prev) => prev + direction);
     if (carouselRef.current !== null) {
       carouselRef.current.style.transition = 'all 0.5s ease-in-out';
     }
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 500);
   };
 
   return (
@@ -64,20 +81,11 @@ const Carousel = ({ carouselList }) => {
 
             return (
               <li key={key} className='flex flex-none items-center justify-center w-full h-[350px] pt-[10px] pb-[15px] overflow-hidden object-contain rounded-t-lg'>
-                <img src={`data:image /jpg;base64,${image}`} alt='carousel-img' className='min-w-full min-h-full flex-shrink-0' />
+                <img src={`data:image /jpg;base64,${image}`} alt='carousel-img' className='min-h-full min-w-full flex-shrink-0' />
               </li>
             );
           })}
         </ul>
-        {/* <div className='bg-gray-900 py-2'>
-          <ul className='flex items-center justify-center'>
-            {currList?.map((value, idx) => {
-              return (
-                <div className='bg-white w-4 h-4 rounded-full m-2 hover:bg-black hover:cursor-pointer' key={idx}></div>
-              );
-            })}
-          </ul>
-        </div> */}
       </div>
     </div>
   );
