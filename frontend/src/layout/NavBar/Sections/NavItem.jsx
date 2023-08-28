@@ -21,7 +21,7 @@ const NavItem = () => {
   }
   return (
     <ul
-      className='text-md justify-center w-full flex gap-4'
+      className='text-md justify-center w-full flex gap-4 font-bold'
     >
       {
         routes.map(({ to, name, auth }) => {
