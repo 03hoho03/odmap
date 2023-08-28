@@ -50,29 +50,27 @@ const Carousel = ({ carouselList }) => {
     const newIndex = currIndex + direction;
 
     if (newIndex === carouselList.length + 1) {
-      console.log('played slide function1');
       moveToNthSlide(1);
     } else if (newIndex === 0) {
-      console.log('played slide function2');
       moveToNthSlide(carouselList.length);
     }
     setCurrIndex((prev) => prev + direction);
     if (carouselRef.current !== null) {
-      carouselRef.current.style.transition = 'all 0.5s ease-in-out';
+      carouselRef.current.style.transition = 'all 0.7s ease-in-out';
     }
 
     setTimeout(() => {
       setIsAnimating(false);
-    }, 500);
+    }, 700);
   };
 
   return (
-    <div className='flex mx-auto my-8 w-6/12 items-center justify-items-center'>
+    <div className='flex mx-auto my-8 items-center justify-items-center'>
       <div className='relative w-full overflow-hidden rounded-t-lg'>
-        <button className='absolute bg-gray-200 top-[45%] rounded-md z-10 px-[8px] py-[6px] left-1 hover:cursor-pointer' onClick={() => handleSwipe(-1)}>
+        <button className='absolute w-10 h-10 bg-gray-200 top-[45%] rounded-full z-10 px-[8px] py-[6px] left-1 hover:cursor-pointer hover:opacity-80' onClick={() => handleSwipe(-1)}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-        <button className='absolute bg-gray-200 top-[45%] rounded-md z-10 px-[8px] py-[6px] right-1 hover:cursor-pointer' onClick={() => handleSwipe(1)}>
+        <button className='absolute w-10 h-10 bg-gray-200 top-[45%] rounded-full z-10 right-1 hover:cursor-pointer hover:opacity-80' onClick={() => handleSwipe(1)}>
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
         <ul className='flex w-full' ref={carouselRef}>
@@ -81,7 +79,7 @@ const Carousel = ({ carouselList }) => {
 
             return (
               <li key={key} className='flex flex-none items-center justify-center w-full h-[350px] pt-[10px] pb-[15px] overflow-hidden object-contain rounded-t-lg'>
-                <img src={`data:image /jpg;base64,${image}`} alt='carousel-img' className='min-h-full min-w-full flex-shrink-0' />
+                <img src={`data:image /jpg;base64,${image}`} alt='carousel-img' className='h-full w-full flex-shrink-0 object-contain' />
               </li>
             );
           })}
