@@ -11,7 +11,7 @@ router.get('/auth',auth, async(req,res,next)=>{
     id:req.user._id,
     email:req.user.email,
     name:req.user.name,
-    role:req.user.name,
+    role:req.user.role,
     image:req.user.image,
   });
 })

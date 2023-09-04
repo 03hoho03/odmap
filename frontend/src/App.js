@@ -3,24 +3,25 @@ import React, { useEffect } from 'react';
 import Navbar from './layout/NavBar';
 import Footer from './layout/Footer';
 import { Outlet, Route, Routes, useLocation } from 'react-router-dom';
-import MainPage from './pages/MainPage/MainPage';
-import MapPage from './pages/MapPage/MapPage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import RegisterPage from './pages/RegisterPage/RegisterPage';
+import MainPage from './pages/MainPage/index';
+import MapPage from './pages/MapPage/index';
+import LoginPage from './pages/LoginPage/index';
+import RegisterPage from './pages/RegisterPage/index';
+import ProfilePage from './pages/ProfilePage/index';
 import { useDispatch, useSelector } from 'react-redux';
-import { authUser } from './store/thunkFunction';
+import { authUser } from './store/thunkFunction/userThunkFunction';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import NotAuthRoutes from './components/NotAuthRoutes';
-import ProfilePage from './pages/ProfilePage/ProfilePage';
+import TestPage from './pages/TestPage';
 
-function Layout () {
+function Layout ({ showFooter = true, map = false }) {
   return (
-    <div>
+    <div className='flex flex-col h-screen font-barun items-center'>
       <Navbar />
-      <main className='mb-auto mx-auto h-screen w-full'>
+      <main className={'mb-auto mx-auto flex-1 w-full'}>
         <Outlet />
       </main>
-      <Footer />
+      {showFooter && <Footer />}
     </div>
   );
 }
@@ -47,7 +48,12 @@ function App () {
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
         </Route>
-        <Route path='/map' element={<MapPage />} />
+      </Route>
+      <Route path='/map' element={<Layout showFooter={false} map={true} />}>
+        <Route index element={<MapPage />}/>
+      </Route>
+      <Route path='/test'>
+        <Route index element={<TestPage />} />
       </Route>
     </Routes>
   );

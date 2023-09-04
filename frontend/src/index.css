@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700&family=Nanum+Gothic:wght@400;700&display=swap');
+
 
 
 body {
@@ -12,6 +13,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+ul::-webkit-scrollbar {
+  width: 8px;
+
+}
+
+ul::-webkit-scrollbar-thumb {
+  background:#6b6c6d;
+
+  border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-track {
+  background: rgba(118, 124, 131, 0.1);  /*스크롤바 뒷 배경 색상*/
+
+  border-radius: 10px;
 }
 
 code {

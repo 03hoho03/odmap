@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../../store/thunkFunction';
+import { logoutUser } from '../../../store/thunkFunction/userThunkFunction';
 
 const routes = [
   { to: '/map', name: '지도', auth: null },

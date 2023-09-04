@@ -4,7 +4,7 @@ const reviewSchema = new mongoose.Schema({
   writerName:{
     type:String,
   },
-  writerEmail:{
+  writerId:{
     type:String,
   },
   content: {
@@ -13,6 +13,9 @@ const reviewSchema = new mongoose.Schema({
   },
   date:{
     type:Number,
+  },
+  hospitalName: {
+    type:String,
   }
 });
 

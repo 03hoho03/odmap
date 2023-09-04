@@ -32,8 +32,8 @@ app.get('/map', (req, res) => {
 })
 
 app.use('/image', require('./routes/image'));
-
 app.use('/users', require('./routes/users'));
+app.use('/review',require('./routes/review'));
 
 app.use((error, req, res, next) => {
   // res.status(err.status || 500);

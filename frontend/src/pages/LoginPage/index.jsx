@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../store/thunkFunction';
+import { loginUser } from '../../store/thunkFunction/userThunkFunction';
 
 const LoginPage = () => {
   const {

@@ -4,7 +4,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Gothic A1', 'sans-serif']
+        nanum: ['"Nanum Gothic"', 'sans-serif'],
+        barun: ['NanumBarunGothic', 'sans-serif']
+      },
+      animation: {
+        'ltr-linear-infinite': 'normal 100s linear infinite'
       }
     }
   },
