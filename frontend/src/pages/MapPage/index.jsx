@@ -38,7 +38,7 @@ const MapPage = () => {
   }
   return (
     <div className='h-full'>
-      <Map />
+      <Map getCurrentCenter={getCurrentCenter}/>
     </div>
   );
 };

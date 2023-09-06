@@ -77,7 +77,6 @@ const ToggleBoxMainContainer = () => {
 
   return (
     <div className='select-none'>
-
       <div className='border-b-2'>
         <div className='flex items-center'>
           <h3 className='font-bold text-2xl my-2 pl-2 mr-2'>의료기관종류</h3>

@@ -1,25 +1,18 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axiosInstance from '../../../utils/axios';
 import { useSelector } from 'react-redux';
 
-const ReviewContainer = ({ hospitalInfo }) => {
+const ReviewAdmitContainer = () => {
   const [reviewTextarea, setReviewTextarea] = useState('');
-  const [reviewList, setReviewList] = useState([]);
+
   const userData = useSelector((state) => state.user?.userData);
-  useEffect(() => {
-    if (hospitalInfo) {
-      axios.post('http://localhost:7070/review/reviewList', { hospitalName: hospitalInfo.요양기관명 }).then((response) => {
-        setReviewList(response.data.reviewList);
-      });
-    }
-  }, [hospitalInfo]);
+  const selectedHospitalItem = useSelector((state) => state.hospital?.mapInstance.selectedHospitalItem);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const body = {
-        hospitalName: hospitalInfo.요양기관명,
+        hospitalName: selectedHospitalItem.요양기관명,
         writerName: userData.name,
         writerId: userData.id,
         content: reviewTextarea,
@@ -41,17 +34,9 @@ const ReviewContainer = ({ hospitalInfo }) => {
           <textarea className='border resize-none' onChange={handleChange} value={reviewTextarea} ></textarea>
           <button type='submit'>리뷰 쓰기</button>
         </form>
-        <ul>
-          {reviewList.length > 0
-            ? reviewList.map((review, idx) => {
-              const { content } = review;
-              return (<li key={`${content}-${idx}`}>{content}</li>);
-            })
-            : <div>리뷰가 없습니다.</div>}
-        </ul>
       </div>
     </div>
   );
 };
 
-export default ReviewContainer;
+export default ReviewAdmitContainer;

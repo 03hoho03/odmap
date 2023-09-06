@@ -15,12 +15,17 @@ router.post('/register',auth,async (req,res,next)=>{
 })
 
 router.post('/reviewList',async (req,res,next)=>{
+  const limit = req.body.limit ? Number(req.body.limit) : 5;
+  const skip = req.body.skip ? Number(req.body.skip) : 0;
   try {
     const hospitalName = req.body.hospitalName;
-    const reviewList = await Review.find({'hospitalName':hospitalName})
-    const reviewCount = await Review.countDocuments({'hospitalName':hospitalName});
+    const reviewItems = await Review.find({'hospitalName':hospitalName})
+      .skip(skip)
+      .limit(limit);
+    const reviewsTotal = await Review.countDocuments({'hospitalName':hospitalName});
+    const hasMore = skip+limit < reviewsTotal ? true : false;
 
-    return res.status(200).json({reviewList,reviewCount});
+    return res.status(200).json({reviewItems,reviewsTotal,hasMore});
   } catch(error) {
     next(error)
   }

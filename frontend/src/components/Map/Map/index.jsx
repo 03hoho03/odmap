@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-
 import ToggleBox from '../ToggleBox/index';
 import { useSelector, useDispatch } from 'react-redux';
 import { findPosition, selected, toggled } from '../../../store/hospitalData';
+import UserToolBar from '../UserToolBar';
 const { kakao } = window;
 
-const Map = () => {
+const Map = ({ getCurrentCenter }) => {
   const dispatch = useDispatch();
 
   const filteredHospitalData = useSelector((state) => state.hospital?.filteredHospitalData);
@@ -105,6 +105,7 @@ const Map = () => {
     const mainContainer = document.createElement('div');
     mainContainer.setAttribute('class', 'text-sm');
     const address = document.createElement('p');
+    address.setAttribute('class', 'break-words');
     address.innerText = `${hospitalInfo.주소}`;
     const addressNumber = document.createElement('p');
     addressNumber.setAttribute('class', 'text-gray-500 mb-1');
@@ -163,7 +164,10 @@ const Map = () => {
   return (
     <div className='flex w-full h-full'>
       <ToggleBox />
-      <div id='map' className='w-full'></div>
+      <div id='map' className='w-full relative'>
+        <UserToolBar getCurrentCenter={getCurrentCenter} />
+      </div>
+
     </div>
   );
 };

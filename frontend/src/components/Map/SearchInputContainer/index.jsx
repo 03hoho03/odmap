@@ -2,8 +2,9 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import ReviewContainer from '../ReviewContainer/index';
+import ReviewAdmitContainer from '../ReviewAdmitContainer/index';
 import { findPosition, selected } from '../../../store/hospitalData';
+import ReviewListContainer from '../ReviewListContainer';
 
 const SearchInputContainer = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -57,26 +58,28 @@ const SearchInputContainer = () => {
           </ul>
         </div>
       </div>
-      <div>
-        {selectedHospitalItem && (
-          <>
-            <div className='px-4 py-4 border-solid border-b-2'>
-              <div className='flex items-center'>
-                <h3 className='text-xl items-center mr-2 font-bold'>{selectedHospitalItem.요양기관명}</h3>
-                <span className='text-xs text-gray-500'>{selectedHospitalItem.종별코드명}</span>
-              </div>
-              <div>
-                <div>{selectedHospitalItem.주소}</div>
-                <div>우편번호 : {selectedHospitalItem.우편번호}</div>
-                <div>연락처 : {selectedHospitalItem.전화번호}</div>
-              </div>
+
+      {selectedHospitalItem && (
+        <div>
+          <div className='px-4 py-4 border-solid border-b-2'>
+            <div className='flex items-center'>
+              <h3 className='text-xl items-center mr-2 font-bold'>{selectedHospitalItem.요양기관명}</h3>
+              <span className='text-xs text-gray-500'>{selectedHospitalItem.종별코드명}</span>
             </div>
-            <ReviewContainer clickedSearchedItem={selectedHospitalItem} />
-          </>
-        )
-        }
-      </div>
+            <div>
+              <div>{selectedHospitalItem.주소}</div>
+              <div>우편번호 : {selectedHospitalItem.우편번호}</div>
+              <div>연락처 : {selectedHospitalItem.전화번호}</div>
+            </div>
+          </div>
+          <ReviewAdmitContainer />
+          <ReviewListContainer />
+          {/* <ReviewContainer clickedSearchedItem={selectedHospitalItem} /> */}
+        </div>
+      )
+      }
     </div>
+
   );
 };
 
